@@ -60,4 +60,6 @@ dependencies {
     implementation ("androidx.camera:camera-view:1.1.0-alpha06")
 
     implementation("com.google.code.gson:gson:2.11.0")
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
 }
