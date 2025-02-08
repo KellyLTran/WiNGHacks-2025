@@ -59,11 +59,18 @@ class DashboardFragment : Fragment() {
         searchView = binding.idSV
 
         productList = ArrayList()
+
+        // Read brand names from Excel and add them to productList
+        val excelReader = ExcelReader(requireContext())
+        productList.addAll(excelReader.readBrandNames())
+
+        /*
         productList.add("La Roche Posay")
         productList.add("KKW Beauty")
         productList.add("ELF")
         productList.add("Revlon")
         productList.add("Lo'Real")
+         */
 
         // initializing list adapter and setting layout
         // for each list view item and adding array list to it.

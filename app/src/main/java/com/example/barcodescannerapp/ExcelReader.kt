@@ -37,4 +37,33 @@ class ExcelReader(private val context: Context) {
         }
         return rowDataList
     }
+
+    fun readBrandNames(): List<String> {
+        val brandNames = mutableListOf<String>()
+
+        try {
+            val inputStream: InputStream = context.assets.open("CF_Products_Dataset.xlsx")
+            val workbook = XSSFWorkbook(inputStream)
+            val sheet = workbook.getSheetAt(0)
+
+            // Start from row index 1 to skip the column titles
+            for (i in 1..sheet.lastRowNum) {
+                val row = sheet.getRow(i)
+                if (row != null) {
+                    // From each row, get specifically the data within the second column at index 1
+                    val cell = row.getCell(1)
+                    if (cell != null) {
+                        brandNames.add(cell.toString().trim())
+                    }
+                }
+            }
+            workbook.close()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("ExcelReader", "Error reading brand names: ${e.message}")
+        }
+        return brandNames
+    }
+
 }
