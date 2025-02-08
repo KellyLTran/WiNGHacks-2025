@@ -31,7 +31,4 @@
             android:name="selectedProduct"
             app:argType="string" />
     </fragment>
-
-
-
 </navigation>

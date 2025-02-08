@@ -50,10 +50,6 @@ class ProductInfoFragment : Fragment() {
         _binding = FragmentProductinfoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textProductInfo
-        productinfoViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 
