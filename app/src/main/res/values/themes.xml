@@ -17,7 +17,7 @@
 
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/Ebony</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/winghackslogotwo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/wingscanlogoo</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.BarcodeScannerApp</item>
     </style>
 </resources>
