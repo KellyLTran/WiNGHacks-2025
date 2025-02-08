@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BarcodeScannerApp</string>
+    <string name="app_name">WingScan</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
