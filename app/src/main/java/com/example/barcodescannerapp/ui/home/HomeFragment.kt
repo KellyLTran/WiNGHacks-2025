@@ -20,7 +20,12 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import android.Manifest
 import android.util.Log
+import androidx.collection.emptyLongSet
+import com.example.barcodescannerapp.BarcodeInfo
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -111,9 +116,22 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleBarcode(barcode: Barcode) {
-        val scannedText = barcode.rawValue ?: "No valid QR code found"
+        val scannedText = barcode.rawValue ?: "No valid barcode found"
 
-        Log.d("BarcodeScanner", "✅ Scanned barode: $scannedText") // Debugging log
+        Log.d("BarcodeScanner", "✅ Scanned barcode: $scannedText") // Debugging log
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val barcodeInformation: BarcodeInfo.RootObject? = BarcodeInfo.parseData(scannedText)
+
+            if (barcodeInformation != null) {
+                Log.d("BarcodeScanner", "Brand: ${barcodeInformation.products[0].brand}")
+                Log.d("BarcodeScanner", "Title: ${barcodeInformation.products[0].title}")
+            }
+            else {
+                Log.d("BarcodeScanner", "Failed to fetch barcode information")
+            }
+        }
+
     }
 
 

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("plugin.serialization") version "1.9.24"
 }
 
 android {
@@ -57,4 +58,6 @@ dependencies {
     implementation ("androidx.camera:camera-camera2:1.3.4")
     implementation ("androidx.camera:camera-lifecycle:1.1.0")
     implementation ("androidx.camera:camera-view:1.1.0-alpha06")
+
+    implementation("com.google.code.gson:gson:2.11.0")
 }
