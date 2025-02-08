@@ -6,20 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is the Dashboard Fragment"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingTop="20dp"/>
+    <!--
+    Code for testing
+   <TextView
+       android:id="@+id/text_dashboard"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="This is the Dashboard Fragment"
+       android:textSize="20sp"
+       android:textColor="#000000"
+       android:textAlignment="center"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:paddingTop="20dp"/>
 
-    <!-- TextView to Display Excel Data -->
     <TextView
         android:id="@+id/excelDataTextView"
         android:layout_width="match_parent"
@@ -34,6 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_dashboard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    -->
 
     <SearchView
         android:id="@+id/idSV"

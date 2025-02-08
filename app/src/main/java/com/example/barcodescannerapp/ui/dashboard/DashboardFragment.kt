@@ -36,14 +36,9 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-        // Find TextView inside fragment_dashboard.xml and display the excel data
-        val excelDataTextView: TextView = binding.excelDataTextView
-        displayExcelData(excelDataTextView)
+        // Code for testing: Find TextView inside fragment_dashboard.xml and display the excel data
+        //val excelDataTextView: TextView = binding.excelDataTextView
+        // displayExcelData(excelDataTextView)
 
         return root
     }
@@ -68,11 +63,18 @@ class DashboardFragment : Fragment() {
         searchView = binding.idSV
 
         productList = ArrayList()
+
+        // Read brand names from Excel and add them to productList
+        val excelReader = ExcelReader(requireContext())
+        productList.addAll(excelReader.readBrandNames())
+
+        /*
         productList.add("La Roche Posay")
         productList.add("KKW Beauty")
         productList.add("ELF")
         productList.add("Revlon")
         productList.add("Lo'Real")
+         */
 
         // initializing list adapter and setting layout
         // for each list view item and adding array list to it.
@@ -105,6 +107,8 @@ class DashboardFragment : Fragment() {
         })
     }
 
+    /*
+     Code for testing
     // Read the Excel file and display it in the TextView
     private fun displayExcelData(textView: TextView) {
 
@@ -128,6 +132,8 @@ class DashboardFragment : Fragment() {
             textView.text = "Error: No data was found."
         }
     }
+
+*/
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
