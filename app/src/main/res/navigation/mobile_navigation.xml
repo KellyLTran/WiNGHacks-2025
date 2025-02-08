@@ -11,6 +11,10 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_productinfo"
+            app:destination="@id/navigation_productinfo" />
+
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.barcodescannerapp.ui.dashboard.DashboardFragment"

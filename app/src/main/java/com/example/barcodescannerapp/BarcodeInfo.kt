@@ -14,7 +14,7 @@ object BarcodeInfo {
         return withContext(Dispatchers.IO) {
             var barcodeInfo: RootObject? = null
             try {
-                val apiKey = "f2ifgpm9cb7rbtw8mxp0g2gtjhub07"
+                val apiKey = "ki8b1leowor4n1qpk6f3e4opwygvos"
                 val url =
                     URL("https://api.barcodelookup.com/v3/products?barcode=$scannedBarcode&formatted=y&key=$apiKey")
                 val br = BufferedReader(InputStreamReader(url.openStream()))
