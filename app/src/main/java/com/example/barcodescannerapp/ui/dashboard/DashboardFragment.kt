@@ -36,15 +36,6 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-        // Find TextView inside fragment_dashboard.xml and display the excel data
-        val excelDataTextView: TextView = binding.excelDataTextView
-        displayExcelData(excelDataTextView)
-
         return root
     }
 
@@ -86,6 +77,13 @@ class DashboardFragment : Fragment() {
         // adapter to our list view.
         productLV.adapter = listAdapter
 
+        // clicking on items in the ListView
+        productLV.setOnItemClickListener { parent, view, position, id ->
+            val selectedItem = productList[position]
+            Toast.makeText(requireContext(), "Clicked: $selectedItem", Toast.LENGTH_SHORT).show()
+
+        }
+
         // on below line we are adding on query
         // listener for our search view.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -105,29 +103,6 @@ class DashboardFragment : Fragment() {
         })
     }
 
-    // Read the Excel file and display it in the TextView
-    private fun displayExcelData(textView: TextView) {
-
-        // Create an instance of the ExcelReader class then call the readExcelFile function on it
-        val excelReader = ExcelReader(requireContext())
-        val excelData = excelReader.readExcelFile()
-
-        // Convert each row into a readable string format
-        if (excelData.isNotEmpty()) {
-            val displayText = excelData.joinToString("\n\n") { row ->
-                "• " + row.joinToString(" | ")
-            }
-            // Display the formatted text inside the TextView
-            textView.text = displayText
-
-            /* Testing only first 5 rows:
-            val testData = excelData.take(5)
-            val displayText = testData.joinToString("\n") { row -> row.joinToString(", ") }
-            textView.text = displayText */
-        } else {
-            textView.text = "Error: No data was found."
-        }
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
