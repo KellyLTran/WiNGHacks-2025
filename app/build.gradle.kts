@@ -4,6 +4,7 @@ plugins {
 
     // safe args for navigation
     id("androidx.navigation.safeargs.kotlin")
+    kotlin("plugin.serialization") version "1.9.24"
 }
 
 android {
@@ -63,4 +64,8 @@ dependencies {
     implementation ("androidx.camera:camera-camera2:1.3.4")
     implementation ("androidx.camera:camera-lifecycle:1.1.0")
     implementation ("androidx.camera:camera-view:1.1.0-alpha06")
+
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
 }
