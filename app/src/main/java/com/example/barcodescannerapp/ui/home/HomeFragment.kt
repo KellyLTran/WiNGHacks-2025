@@ -20,6 +20,7 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import android.Manifest
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.emptyLongSet
 import com.example.barcodescannerapp.BarcodeInfo
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -48,6 +49,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
 
         previewView = binding.previewView
         resultTextView = binding.resultTextView
