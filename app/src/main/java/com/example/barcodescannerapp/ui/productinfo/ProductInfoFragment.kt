@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.barcodescannerapp.databinding.FragmentHomeBinding
 import com.example.barcodescannerapp.databinding.FragmentProductinfoBinding
 import com.example.barcodescannerapp.ui.home.HomeViewModel
+import com.example.barcodescannerapp.ExcelReader
 
 class ProductInfoFragment : Fragment() {
 
@@ -24,23 +25,34 @@ class ProductInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productinfoViewModel =
-            ViewModelProvider(this).get(ProductInfoViewModel::class.java)
-
         _binding = FragmentProductinfoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textProductInfo
-        productinfoViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val excelReader = ExcelReader(requireContext())
+        val brandList = excelReader.getBrandData()
+
+        // Build a string to display brands and their attributes
+        val displayText = if (brandList.isNotEmpty()) {
+            brandList.joinToString("\n\n") { brand ->
+                """
+            Brand: ${brand.name}
+            Fully Vegan: ${if (brand.allVegan) "Yes" else "No"}
+            Partially Vegan: ${if (brand.partialVegan) "Yes" else "No"}
+            Black Owned: ${if (brand.blackOwned) "Yes" else "No"}
+            """.trimIndent()
+            }
+        } else {
+            "No brands were found."
         }
-        return root
+        binding.textProductInfo.text = displayText
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    {
-        }
     }
 }
