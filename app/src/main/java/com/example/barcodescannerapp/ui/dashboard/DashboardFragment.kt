@@ -16,6 +16,9 @@ import com.example.barcodescannerapp.databinding.ActivityMainBinding
 import com.example.barcodescannerapp.ExcelReader
 import com.example.barcodescannerapp.databinding.FragmentDashboardBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.barcodescannerapp.ui.dashboard.DashboardFragmentDirections
 
 class DashboardFragment : Fragment() {
 
@@ -64,14 +67,6 @@ class DashboardFragment : Fragment() {
         val excelReader = ExcelReader(requireContext())
         productList.addAll(excelReader.readBrandNames())
 
-        /*
-        productList.add("La Roche Posay")
-        productList.add("KKW Beauty")
-        productList.add("ELF")
-        productList.add("Revlon")
-        productList.add("Lo'Real")
-         */
-
         // initializing list adapter and setting layout
         // for each list view item and adding array list to it.
         listAdapter = ArrayAdapter<String>(
@@ -87,8 +82,8 @@ class DashboardFragment : Fragment() {
         // clicking on items in the ListView
         productLV.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = productList[position]
-            Toast.makeText(requireContext(), "Clicked: $selectedItem", Toast.LENGTH_SHORT).show()
-
+            val action = DashboardFragmentDirections.actionNavigationDashboardToNavigationProductinfo(selectedItem)
+            findNavController().navigate(action)
         }
 
         // on below line we are adding on query

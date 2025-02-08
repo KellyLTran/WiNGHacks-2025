@@ -17,4 +17,21 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_productinfo"
+            app:destination="@id/navigation_productinfo" />
+
+    <fragment
+        android:id="@+id/navigation_productinfo"
+        android:name="com.example.barcodescannerapp.ui.productinfo.ProductInfoFragment"
+        android:label="@string/title_productinfo"
+        tools:layout="@layout/fragment_productinfo">
+
+        <argument
+            android:name="selectedProduct"
+            app:argType="string" />
+    </fragment>
+
+
+
 </navigation>
