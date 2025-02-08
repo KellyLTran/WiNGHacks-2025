@@ -118,4 +118,3 @@ class ExcelReader(private val context: Context) {
         return brandList
     }
 }
-

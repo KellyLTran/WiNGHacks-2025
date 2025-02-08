@@ -11,6 +11,8 @@ import com.example.barcodescannerapp.databinding.FragmentHomeBinding
 import com.example.barcodescannerapp.databinding.FragmentProductinfoBinding
 import com.example.barcodescannerapp.ui.home.HomeViewModel
 import com.example.barcodescannerapp.ExcelReader
+import android.util.Log
+
 
 class ProductInfoFragment : Fragment() {
 
@@ -32,21 +34,27 @@ class ProductInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Get the selected brand name that the user clicked
+        val selectedBrand = arguments?.getString("selectedItem") ?: "Unknown Brand"
+        Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand")
+
         val excelReader = ExcelReader(requireContext())
         val brandList = excelReader.getBrandData()
 
-        // Build a string to display brands and their attributes
-        val displayText = if (brandList.isNotEmpty()) {
-            brandList.joinToString("\n\n") { brand ->
-                """
-            Brand: ${brand.name}
-            Fully Vegan: ${if (brand.allVegan) "Yes" else "No"}
-            Partially Vegan: ${if (brand.partialVegan) "Yes" else "No"}
-            Black Owned: ${if (brand.blackOwned) "Yes" else "No"}
+        // Find the specific brand by name
+        val selectedBrandInfo = brandList.find { it.name == selectedBrand }
+
+        // Display only the selected brand's information
+        val displayText = if (selectedBrandInfo != null) {
+            """
+            Brand: ${selectedBrandInfo.name}
+            
+            Fully Vegan: ${if (selectedBrandInfo.allVegan) "Yes" else "No"}
+            Partially Vegan: ${if (selectedBrandInfo.partialVegan) "Yes" else "No"}
+            Black Owned: ${if (selectedBrandInfo.blackOwned) "Yes" else "No"}
             """.trimIndent()
-            }
         } else {
-            "No brands were found."
+            "Brand Data Not Found"
         }
         binding.textProductInfo.text = displayText
     }

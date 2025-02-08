@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_productinfo">
 
         <argument
-            android:name="selectedProduct"
+            android:name="selectedItem"
             app:argType="string" />
     </fragment>
 
