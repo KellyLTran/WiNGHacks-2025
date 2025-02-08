@@ -14,6 +14,8 @@ import com.example.barcodescannerapp.databinding.FragmentHomeBinding
 import com.example.barcodescannerapp.databinding.FragmentProductinfoBinding
 import com.example.barcodescannerapp.ui.home.HomeViewModel
 import androidx.navigation.fragment.findNavController
+import com.example.barcodescannerapp.ExcelReader
+import android.util.Log
 
 class ProductInfoFragment : Fragment() {
 
@@ -23,40 +25,49 @@ class ProductInfoFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        // ActionBar with back button
-//        (activity as? AppCompatActivity)?.supportActionBar?.apply {
-//            show() // Show the ActionBar
-//            setDisplayHomeAsUpEnabled(true)
-//            title = "Product Info"
-//        }
-
-        // Handle back button press
-        binding.backButton.setOnClickListener {
-            findNavController().navigateUp()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productinfoViewModel =
-            ViewModelProvider(this).get(ProductInfoViewModel::class.java)
-
         _binding = FragmentProductinfoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        // Get the selected brand name that the user clicked
+        val selectedBrand = arguments?.getString("selectedItem") ?: "Unknown Brand"
+        Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand")
+
+        val excelReader = ExcelReader(requireContext())
+        val brandList = excelReader.getBrandData()
+
+        // Find the specific brand by name
+        val selectedBrandInfo = brandList.find { it.name == selectedBrand }
+
+        // Display only the selected brand's information
+        val displayText = if (selectedBrandInfo != null) {
+            """
+            Brand: ${selectedBrandInfo.name}
+            
+            Fully Vegan: ${if (selectedBrandInfo.allVegan) "Yes" else "No"}
+            Partially Vegan: ${if (selectedBrandInfo.partialVegan) "Yes" else "No"}
+            Black Owned: ${if (selectedBrandInfo.blackOwned) "Yes" else "No"}
+            """.trimIndent()
+        } else {
+            "Brand Data Not Found"
+        }
+        binding.textProductInfo.text = displayText
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    {
-        }
     }
 }
