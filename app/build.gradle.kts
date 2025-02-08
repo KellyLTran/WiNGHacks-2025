@@ -39,6 +39,9 @@ android {
 }
 
 dependencies {
+    // Add Apache POI Dependencies for reading excel files
+    implementation(libs.apache.poi)
+    implementation(libs.apache.poi.ooxml)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
