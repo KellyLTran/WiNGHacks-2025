@@ -192,15 +192,15 @@ class HomeFragment : Fragment() {
         Log.d("BarcodeScanner", "Scanned barcode: $scannedText") // Debugging log
 
         CoroutineScope(Dispatchers.Main).launch {
-            //val barcodeInformation: BarcodeInfo.RootObject? = BarcodeInfo.parseData(scannedText)
-            val barcodeInformation: BarcodeInfo.RootObject = BarcodeInfo.RootObject().apply {
+            val barcodeInformation: BarcodeInfo.RootObject? = BarcodeInfo.parseData(scannedText)
+            /*val barcodeInformation: BarcodeInfo.RootObject = BarcodeInfo.RootObject().apply {
                 products = arrayOf(
                     BarcodeInfo.Product().apply {
                         barcode_number = "717489950114"
                         brand = "Milani"
                     }
                 )
-            }
+            }*/
 
             if (barcodeInformation != null) {
                 val item = barcodeInformation.products[0].brand
