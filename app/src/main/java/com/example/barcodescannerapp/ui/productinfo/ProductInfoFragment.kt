@@ -60,29 +60,17 @@ class ProductInfoFragment : Fragment() {
         // Find the specific brand by name
         val selectedBrandInfo = brandList.find { it.name == selectedBrand }
 
-        if (selectedBrandInfo != null) {
-
-            // Get the images from the drawable directory
-            val yesDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.yes_icon)
-            val noDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.no_icon)
-
-            // Can resize the images with the boundary numbers
-            fun getImageSpan(drawable: Drawable?): ImageSpan {
-                drawable?.setBounds(0, 0, 40, 40)
-                return ImageSpan(drawable!!, ImageSpan.ALIGN_BASELINE)
-            }
-
-            // Create a SpannableString with labels for the images
-            val text = SpannableString("Fully Vegan:  \nPartially Vegan:  \nBlack Owned:  ")
-
-            text.setSpan(getImageSpan(if (selectedBrandInfo.allVegan) yesDrawable else noDrawable), 13, 14, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-            text.setSpan(getImageSpan(if (selectedBrandInfo.partialVegan) yesDrawable else noDrawable), 31, 32, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-            text.setSpan(getImageSpan(if (selectedBrandInfo.blackOwned) yesDrawable else noDrawable), 47, 48, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-
-            binding.textProductInfo.text = text
+        // Display only the selected brand's information
+        val displayText = if (selectedBrandInfo != null) {
+            """
+        Fully Vegan: ${if (selectedBrandInfo.allVegan) "✅" else "❌"}
+        Partially Vegan: ${if (selectedBrandInfo.partialVegan) "✅" else "❌"}
+        Black Owned: ${if (selectedBrandInfo.blackOwned) "✅" else "❌"}
+        """.trimIndent()
         } else {
-            binding.textProductInfo.text = "Brand Data Not Found"
+            "Brand Data Not Found"
         }
+        binding.textProductInfo.text = displayText
 
         binding.backButton.setOnClickListener {
             if (sourceFragment == "home") {

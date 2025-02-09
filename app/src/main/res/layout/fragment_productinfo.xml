@@ -11,19 +11,21 @@
         android:id="@+id/textProductInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/Hunters_Green"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="150dp"
         android:lineSpacingExtra="100dp"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:fontFamily="@font/josefinsans_regular"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/josefinsans_light"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <Button
         android:id="@+id/backButton"
@@ -82,9 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product Name"
-                android:textSize="20sp"
+                android:textSize="28sp"
                 android:textColor="@android:color/black"
-                android:fontFamily="@font/josefinsans_light"/>
+                android:fontFamily="@font/josefinsans_regular"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
