@@ -28,6 +28,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.emptyLongSet
 import com.example.barcodescannerapp.BarcodeInfo
+import com.example.barcodescannerapp.ui.dashboard.DashboardFragmentDirections
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +61,6 @@ class HomeFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.hide()
 
         previewView = binding.previewView
-        resultTextView = binding.resultTextView
 
         barcodeScanner = BarcodeScanning.getClient()
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -122,19 +122,19 @@ class HomeFragment : Fragment() {
     private fun inBoundingBox(imageBoundingBox: Rect, imageProxy: ImageProxy): Boolean {
         val mediaImage = imageProxy.image ?: return false
 
-        val imageWidth = mediaImage.width  // 640
-        val imageHeight = mediaImage.height // 480
+        val imageWidth = mediaImage.width
+        val imageHeight = mediaImage.height
 
-        val previewWidth = previewView.width  // 1080
-        val previewHeight = previewView.height // 1874
+        val previewWidth = previewView.width
+        val previewHeight = previewView.height
 
         val isImageRotated = imageProxy.imageInfo.rotationDegrees == 90 || imageProxy.imageInfo.rotationDegrees == 270
 
         val adjustedImageWidth = if (isImageRotated) imageHeight else imageWidth
         val adjustedImageHeight = if (isImageRotated) imageWidth else imageHeight
 
-        val scaleX = previewWidth.toFloat() / adjustedImageWidth // 1080 / 640
-        val scaleY = previewHeight.toFloat() / adjustedImageHeight // 1874 / 480
+        val scaleX = previewWidth.toFloat() / adjustedImageWidth
+        val scaleY = previewHeight.toFloat() / adjustedImageHeight
 
         val scale = minOf(scaleX, scaleY)
 
@@ -189,21 +189,15 @@ class HomeFragment : Fragment() {
     private fun handleBarcode(barcode: Barcode) {
         val scannedText = barcode.rawValue ?: "No valid barcode found"
 
-        Log.d("BarcodeScanner", "✅ Scanned barcode: $scannedText") // Debugging log
+        Log.d("BarcodeScanner", "Scanned barcode: $scannedText") // Debugging log
 
         CoroutineScope(Dispatchers.Main).launch {
             val barcodeInformation: BarcodeInfo.RootObject? = BarcodeInfo.parseData(scannedText)
 
             if (barcodeInformation != null) {
                 val item = barcodeInformation.products[0].brand
-                val action = item?.let {
-                    HomeFragmentDirections.actionNavigationHomeToNavigationProductinfo(
-                        it
-                    )
-                }
-                if (action != null) {
-                    findNavController().navigate(action)
-                }
+                val action = HomeFragmentDirections.actionNavigationHomeToNavigationProductinfo(item, "home")
+                findNavController().navigate(action)
 
                 // Debugging
                 // Log.d("BarcodeScanner", "Brand: ${barcodeInformation.products[0].brand}")

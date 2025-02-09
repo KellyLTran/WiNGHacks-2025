@@ -16,6 +16,7 @@ import com.example.barcodescannerapp.ui.home.HomeViewModel
 import androidx.navigation.fragment.findNavController
 import com.example.barcodescannerapp.ExcelReader
 import android.util.Log
+import com.example.barcodescannerapp.R
 
 class ProductInfoFragment : Fragment() {
 
@@ -41,10 +42,10 @@ class ProductInfoFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        // Get and display the specific brand that the user clicked
+        // Get the selected brand name that the user clicked
         val selectedBrand = arguments?.getString("selectedItem") ?: "Unknown Brand"
-        // Testing: Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand")
-        binding.titleText2.text = selectedBrand
+        val sourceFragment = arguments?.getString("sourceFragment") ?: "home"
+        Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand from $sourceFragment")
 
         val excelReader = ExcelReader(requireContext())
         val brandList = excelReader.getBrandData()
@@ -55,6 +56,8 @@ class ProductInfoFragment : Fragment() {
         // Display only the selected brand's information
         val displayText = if (selectedBrandInfo != null) {
             """
+            Brand: ${selectedBrandInfo.name}
+            
             Fully Vegan: ${if (selectedBrandInfo.allVegan) "Yes" else "No"}
             Partially Vegan: ${if (selectedBrandInfo.partialVegan) "Yes" else "No"}
             Black Owned: ${if (selectedBrandInfo.blackOwned) "Yes" else "No"}
@@ -63,6 +66,14 @@ class ProductInfoFragment : Fragment() {
             "Brand Data Not Found"
         }
         binding.textProductInfo.text = displayText
+
+        binding.backButton.setOnClickListener {
+            if (sourceFragment == "home") {
+                findNavController().navigate(R.id.navigation_home)
+            } else {
+                findNavController().navigate(R.id.navigation_dashboard)
+            }
+        }
     }
 
     override fun onDestroyView() {
