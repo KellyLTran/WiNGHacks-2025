@@ -16,6 +16,12 @@ import com.example.barcodescannerapp.ui.home.HomeViewModel
 import androidx.navigation.fragment.findNavController
 import com.example.barcodescannerapp.ExcelReader
 import android.util.Log
+import android.text.style.ImageSpan
+import android.graphics.drawable.Drawable
+import android.text.SpannableString
+import android.text.Spanned
+import androidx.core.content.ContextCompat
+import com.example.barcodescannerapp.R
 
 class ProductInfoFragment : Fragment() {
 
@@ -52,17 +58,29 @@ class ProductInfoFragment : Fragment() {
         // Find the specific brand by name
         val selectedBrandInfo = brandList.find { it.name == selectedBrand }
 
-        // Display only the selected brand's information
-        val displayText = if (selectedBrandInfo != null) {
-            """
-            Fully Vegan: ${if (selectedBrandInfo.allVegan) "Yes" else "No"}
-            Partially Vegan: ${if (selectedBrandInfo.partialVegan) "Yes" else "No"}
-            Black Owned: ${if (selectedBrandInfo.blackOwned) "Yes" else "No"}
-            """.trimIndent()
+        if (selectedBrandInfo != null) {
+
+            // Get the images from the drawable directory
+            val yesDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.yes_icon)
+            val noDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.no_icon)
+
+            // Can resize the images with the boundary numbers
+            fun getImageSpan(drawable: Drawable?): ImageSpan {
+                drawable?.setBounds(0, 0, 40, 40)
+                return ImageSpan(drawable!!, ImageSpan.ALIGN_BASELINE)
+            }
+
+            // Create a SpannableString with labels for the images
+            val text = SpannableString("Fully Vegan:  \nPartially Vegan:  \nBlack Owned:  ")
+
+            text.setSpan(getImageSpan(if (selectedBrandInfo.allVegan) yesDrawable else noDrawable), 13, 14, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+            text.setSpan(getImageSpan(if (selectedBrandInfo.partialVegan) yesDrawable else noDrawable), 31, 32, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+            text.setSpan(getImageSpan(if (selectedBrandInfo.blackOwned) yesDrawable else noDrawable), 47, 48, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+
+            binding.textProductInfo.text = text
         } else {
-            "Brand Data Not Found"
+            binding.textProductInfo.text = "Brand Data Not Found"
         }
-        binding.textProductInfo.text = displayText
     }
 
     override fun onDestroyView() {
