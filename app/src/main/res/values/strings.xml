@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">WingScan</string>
-    <string name="barcode">Barcode</string>
-    <string name="list">List</string>
+    <string name="barcode">Barcode Scanner</string>
+    <string name="list">Brands</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_productinfo">Product Info</string>
 </resources>
