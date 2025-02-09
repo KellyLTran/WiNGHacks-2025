@@ -69,16 +69,14 @@ class DashboardFragment : Fragment() {
         val excelReader = ExcelReader(requireContext())
         productList.addAll(excelReader.readBrandNames())
 
-        // initializing list adapter and setting layout
-        // for each list view item and adding array list to it.
+        // initializing list adapter and setting layout for each list view item and adding array list to it
         listAdapter = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_list_item_1,
             productList
         )
 
-        // on below line setting list
-        // adapter to our list view.
+        // setting list adapter to our list view.
         productLV.adapter = listAdapter
 
         // clicking on items in the ListView
@@ -88,8 +86,7 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        // on below line we are adding on query
-        // listener for our search view.
+        // adding on query listener for our search view.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (productList.contains(query)) {
