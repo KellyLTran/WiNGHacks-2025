@@ -58,44 +58,17 @@ class ProductInfoFragment : Fragment() {
         // Find the specific brand by name
         val selectedBrandInfo = brandList.find { it.name == selectedBrand }
 
-        if (selectedBrandInfo != null) {
-
-            // Get the images from the drawable directory
-            val yesDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.yes_icon)
-            val noDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.no_icon)
-
-            // Can resize the images with the boundary numbers
-            fun getImageSpan(drawable: Drawable?): ImageSpan {
-                drawable?.setBounds(0, 0, 90, 90)
-                return ImageSpan(drawable!!, ImageSpan.ALIGN_CENTER)
-            }
-
-            // Create a SpannableString with labels for the images
-            val text = SpannableString(
-                "Fully Vegan:  X\n" +
-                        "Partially Vegan:  X\n" +
-                        "Black Owned:  X"
-            )
-
-            // Find the positions of "X" dynamically
-            val veganIndex = text.indexOf("X")
-            val partialVeganIndex = text.indexOf("X", veganIndex + 1)
-            val blackOwnedIndex = text.indexOf("X", partialVeganIndex + 1)
-
-            // Apply ImageSpans after each label
-            text.setSpan(getImageSpan(if (selectedBrandInfo.allVegan) yesDrawable else noDrawable),
-                veganIndex, veganIndex + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-
-            text.setSpan(getImageSpan(if (selectedBrandInfo.partialVegan) yesDrawable else noDrawable),
-                partialVeganIndex, partialVeganIndex + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-
-            text.setSpan(getImageSpan(if (selectedBrandInfo.blackOwned) yesDrawable else noDrawable),
-                blackOwnedIndex, blackOwnedIndex + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-
-            binding.textProductInfo.text = text
+        // Display only the selected brand's information
+        val displayText = if (selectedBrandInfo != null) {
+            """
+        Fully Vegan: ${if (selectedBrandInfo.allVegan) "✅" else "❌"}
+        Partially Vegan: ${if (selectedBrandInfo.partialVegan) "✅" else "❌"}
+        Black Owned: ${if (selectedBrandInfo.blackOwned) "✅" else "❌"}
+        """.trimIndent()
         } else {
-            binding.textProductInfo.text = "Brand Data Not Found"
+            "Brand Data Not Found"
         }
+        binding.textProductInfo.text = displayText
     }
 
     override fun onDestroyView() {
