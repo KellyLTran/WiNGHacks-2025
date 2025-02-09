@@ -1,6 +1,8 @@
 package com.example.barcodescannerapp.ui.dashboard
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +14,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.barcodescannerapp.R
-import com.example.barcodescannerapp.databinding.ActivityMainBinding
-import com.example.barcodescannerapp.ExcelReader
-import com.example.barcodescannerapp.databinding.FragmentDashboardBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.barcodescannerapp.ui.dashboard.DashboardFragmentDirections
+import com.example.barcodescannerapp.ExcelReader
+import com.example.barcodescannerapp.R
+import com.example.barcodescannerapp.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
@@ -72,7 +70,7 @@ class DashboardFragment : Fragment() {
         // initializing list adapter and setting layout for each list view item and adding array list to it
         listAdapter = ArrayAdapter<String>(
             requireContext(),
-            android.R.layout.simple_list_item_1,
+            R.layout.list_item,
             productList
         )
 
