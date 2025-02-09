@@ -84,7 +84,7 @@ class DashboardFragment : Fragment() {
         // clicking on items in the ListView
         productLV.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = productList[position]
-            val action = DashboardFragmentDirections.actionNavigationDashboardToNavigationProductinfo(selectedItem)
+            val action = DashboardFragmentDirections.actionNavigationDashboardToNavigationProductinfo(selectedItem, "dashboard")
             findNavController().navigate(action)
         }
 

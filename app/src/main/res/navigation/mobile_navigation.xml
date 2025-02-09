@@ -33,6 +33,12 @@
 
         <argument
             android:name="selectedItem"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="Unknown" />
+
+        <argument
+            android:name="sourceFragment"
+            app:argType="string"
+            android:defaultValue="home" />
     </fragment>
 </navigation>
