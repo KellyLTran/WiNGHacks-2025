@@ -79,13 +79,6 @@ class DashboardFragment : Fragment() {
         // setting list adapter to our list view.
         productLV.adapter = listAdapter
 
-        // clicking on items in the ListView
-        productLV.setOnItemClickListener { parent, view, position, id ->
-            val selectedItem = productList[position]
-            val action = DashboardFragmentDirections.actionNavigationDashboardToNavigationProductinfo(selectedItem, "dashboard")
-            findNavController().navigate(action)
-        }
-
         // adding on query listener for our search view.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -102,6 +95,15 @@ class DashboardFragment : Fragment() {
                 return false
             }
         })
+
+        // clicking on items in the ListView
+        productLV.setOnItemClickListener { parent, view, position, id ->
+            val selectedItem = listAdapter.getItem(position)
+            if (selectedItem != null) {
+                val action = DashboardFragmentDirections.actionNavigationDashboardToNavigationProductinfo(selectedItem, "dashboard")
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onDestroyView() {
