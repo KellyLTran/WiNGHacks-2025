@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Ebony">#606553</color>
     <color name="Hunters_Green">#37624A</color>
-    <color name="Aquamarine">#EBFFF5</color>
-    <color name="background_color">#37624a</color>
+    <color name="Aquamarine">#99C2A2</color>
+    <color name="Beige">#F1F3E2</color>
+    <color name="background_color">#37624A</color>
+
 </resources>

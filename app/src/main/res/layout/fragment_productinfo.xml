@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Aquamarine"
+    android:background="@color/Beige"
     tools:context=".ui.home.HomeFragment">
 
     <TextView
@@ -12,10 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="340dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="@color/Hunters_Green"
+        android:lineSpacingExtra="100dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +66,7 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="80dp"
-        android:background="@drawable/toolbar_design"
+        android:background="@color/Aquamarine"
         app:titleTextColor="@android:color/white" >
 
         <LinearLayout
