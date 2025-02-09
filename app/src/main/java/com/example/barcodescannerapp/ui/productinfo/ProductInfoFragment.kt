@@ -57,7 +57,7 @@ class ProductInfoFragment : Fragment() {
 
         // Find the specific brand by name
         val selectedBrandInfo = brandList.find { it.name == selectedBrand }
-
+    
         // Display only the selected brand's information
         val displayText = if (selectedBrandInfo != null) {
             """
