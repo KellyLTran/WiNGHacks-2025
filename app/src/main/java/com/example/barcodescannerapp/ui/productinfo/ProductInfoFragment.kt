@@ -66,16 +66,31 @@ class ProductInfoFragment : Fragment() {
 
             // Can resize the images with the boundary numbers
             fun getImageSpan(drawable: Drawable?): ImageSpan {
-                drawable?.setBounds(0, 0, 40, 40)
-                return ImageSpan(drawable!!, ImageSpan.ALIGN_BASELINE)
+                drawable?.setBounds(0, 0, 90, 90)
+                return ImageSpan(drawable!!, ImageSpan.ALIGN_CENTER)
             }
 
             // Create a SpannableString with labels for the images
-            val text = SpannableString("Fully Vegan:  \nPartially Vegan:  \nBlack Owned:  ")
+            val text = SpannableString(
+                "Fully Vegan:  X\n" +
+                        "Partially Vegan:  X\n" +
+                        "Black Owned:  X"
+            )
 
-            text.setSpan(getImageSpan(if (selectedBrandInfo.allVegan) yesDrawable else noDrawable), 13, 14, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-            text.setSpan(getImageSpan(if (selectedBrandInfo.partialVegan) yesDrawable else noDrawable), 31, 32, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-            text.setSpan(getImageSpan(if (selectedBrandInfo.blackOwned) yesDrawable else noDrawable), 47, 48, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+            // Find the positions of "X" dynamically
+            val veganIndex = text.indexOf("X")
+            val partialVeganIndex = text.indexOf("X", veganIndex + 1)
+            val blackOwnedIndex = text.indexOf("X", partialVeganIndex + 1)
+
+            // Apply ImageSpans after each label
+            text.setSpan(getImageSpan(if (selectedBrandInfo.allVegan) yesDrawable else noDrawable),
+                veganIndex, veganIndex + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+
+            text.setSpan(getImageSpan(if (selectedBrandInfo.partialVegan) yesDrawable else noDrawable),
+                partialVeganIndex, partialVeganIndex + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+
+            text.setSpan(getImageSpan(if (selectedBrandInfo.blackOwned) yesDrawable else noDrawable),
+                blackOwnedIndex, blackOwnedIndex + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 
             binding.textProductInfo.text = text
         } else {
