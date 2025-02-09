@@ -41,9 +41,10 @@ class ProductInfoFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        // Get the selected brand name that the user clicked
+        // Get and display the specific brand that the user clicked
         val selectedBrand = arguments?.getString("selectedItem") ?: "Unknown Brand"
-        Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand")
+        // Testing: Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand")
+        binding.titleText2.text = selectedBrand
 
         val excelReader = ExcelReader(requireContext())
         val brandList = excelReader.getBrandData()
@@ -54,8 +55,6 @@ class ProductInfoFragment : Fragment() {
         // Display only the selected brand's information
         val displayText = if (selectedBrandInfo != null) {
             """
-            Brand: ${selectedBrandInfo.name}
-            
             Fully Vegan: ${if (selectedBrandInfo.allVegan) "Yes" else "No"}
             Partially Vegan: ${if (selectedBrandInfo.partialVegan) "Yes" else "No"}
             Black Owned: ${if (selectedBrandInfo.blackOwned) "Yes" else "No"}
