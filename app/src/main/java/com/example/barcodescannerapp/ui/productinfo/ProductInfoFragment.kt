@@ -81,7 +81,6 @@ class ProductInfoFragment : Fragment() {
         } else {
             binding.textProductInfo.text = "Brand Data Not Found"
         }
-        binding.textProductInfo.text = displayText
 
         binding.backButton.setOnClickListener {
             if (sourceFragment == "home") {
