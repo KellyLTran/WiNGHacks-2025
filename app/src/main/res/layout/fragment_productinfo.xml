@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Aquamarine"
     tools:context=".ui.home.HomeFragment">
 
     <TextView
@@ -62,7 +63,7 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="80dp"
-        android:background="@color/Aquamarine"
+        android:background="@drawable/toolbar_design"
         app:titleTextColor="@android:color/white" >
 
         <LinearLayout
