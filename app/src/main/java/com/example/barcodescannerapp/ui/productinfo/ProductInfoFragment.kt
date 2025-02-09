@@ -49,6 +49,8 @@ class ProductInfoFragment : Fragment() {
 
         // Get the selected brand name that the user clicked
         val selectedBrand = arguments?.getString("selectedItem") ?: "Unknown Brand"
+        binding.titleText2.text = selectedBrand
+
         val sourceFragment = arguments?.getString("sourceFragment") ?: "home"
         Log.d("ProductInfoFragment", "Received selected brand: $selectedBrand from $sourceFragment")
 

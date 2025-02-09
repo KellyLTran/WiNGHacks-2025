@@ -15,9 +15,9 @@
         android:layout_marginTop="340dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="28sp"
         android:textColor="@color/Hunters_Green"
         android:lineSpacingExtra="100dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,12 +27,13 @@
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="109dp"
-        android:layout_height="39dp"
+        android:layout_width="103dp"
+        android:layout_height="38dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/Hunters_Green"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/Aquamarine"
         android:text="Back"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
@@ -51,13 +52,14 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <TextView
-                android:id="@+id/titleText"
+            <ImageView
+                android:id="@+id/titleImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Info"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"/>
+                android:layout_marginRight="15dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="App Logo"
+                android:src="@drawable/wingscanlogo_bfonly" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
