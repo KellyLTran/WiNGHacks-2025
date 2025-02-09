@@ -20,6 +20,7 @@
         android:padding="4dp"
         android:paddingTop="50dp"
         android:queryHint="Search Product"
+        android:queryBackground="@null"
         tools:layout_editor_absoluteY="8dp" />
 
     <ListView
