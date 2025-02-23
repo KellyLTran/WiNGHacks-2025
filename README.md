@@ -1,7 +1,7 @@
 ## WingScan
 
 Scan, Shop, and Soar towards better choices with WingScan! Scan products to see if their brands are made ethically or owned by under-represented groups. 
-[View on Devpost](https://devpost.com/software/wingscan)
+[WingScan Devpost](https://devpost.com/software/wingscan)
 
 ## Inspiration
 
